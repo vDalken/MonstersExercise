@@ -18,7 +18,7 @@ public class Player {
             System.out.print(this.name + " please pick a number: ");
             numberOfMonstersPickedByUser = scan.nextLine();
             if (isNumberPickedByUserValid(numberOfMonstersPickedByUser)) {
-                numberOfMonsters = Integer.parseInt(numberOfMonstersPickedByUser);
+                numberOfMonsters = Integer.parseInt(numberOfMonstersPickedByUser.trim());
             } else {
                 System.out.println("Write a number please");
             }
@@ -76,8 +76,7 @@ public class Player {
     }
 
     private boolean isNumberPickedByUserValid(String numberOfMonstersPickedByUser) {
-        numberOfMonstersPickedByUser = numberOfMonstersPickedByUser.trim();
-        if (numberOfMonstersPickedByUser.matches("\\d+$")) {
+        if (numberOfMonstersPickedByUser.trim().matches("\\d+$")) {
             return true;
         }
         return false;

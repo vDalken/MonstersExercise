@@ -38,18 +38,14 @@ class GameManager {
     private void attackingRounds(Player player1, Player player2) {
         do {
             player1.randomizedAttack(player2);
-            if (player2.getMonsters().isEmpty()) {
-                break;
-            }
+            if (player2.getMonsters().isEmpty()) break;
             player2.randomizedAttack(player1);
-            if (player1.getMonsters().isEmpty()) {
-                break;
-            }
-        } while (!player1.getMonsters().isEmpty() || !player2.getMonsters().isEmpty());
-        if (player1.getMonsters().isEmpty()) {
-            System.out.println("\nPlayer 1 won");
-        } else {
-            System.out.println("\nPlayer 2 won");
-        }
+            if (player1.getMonsters().isEmpty()) break;
+        } while (!(player1.getMonsters().isEmpty() || player2.getMonsters().isEmpty()));
+        showWinner(player1);
+    }
+
+    private void showWinner(Player player1){
+        System.out.println(player1.getMonsters().isEmpty() ? "\nPlayer 1 won" : "\nPlayer 2 won");
     }
 }
