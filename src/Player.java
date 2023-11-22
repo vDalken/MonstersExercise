@@ -31,31 +31,41 @@ public class Player {
         int numberOfMonstersToCreate = numberOfMonsters;
         while (numberOfMonstersToCreate > 0) {
             int randomizedNumber = randomize.nextInt(101);
-            if (randomizedNumber <= 33) {
-                monsters.add(new Mummy());
-            } else if (randomizedNumber <= 66) {
-                monsters.add(new Vampire());
-            } else {
-                monsters.add(new Werewolf());
-            }
+            randomizeMonster(randomizedNumber);
             numberOfMonstersToCreate--;
+        }
+    }
+
+    private void randomizeMonster(int randomizedNumber) {
+        if (randomizedNumber <= 33) {
+            monsters.add(new Mummy());
+        } else if (randomizedNumber <= 66) {
+            monsters.add(new Vampire());
+        } else {
+            monsters.add(new Werewolf());
         }
     }
 
     public void randomizedAttack(Player defendingPlayer) {
         int indexOfAttackingPlayer = randomizeIndexOfMonster(this.numberOfMonsters);
         int indexOfDefendingPlayer = randomizeIndexOfMonster(defendingPlayer.numberOfMonsters);
-        this.monsters.get(indexOfAttackingPlayer).attack(defendingPlayer.monsters.get(indexOfDefendingPlayer));
         String nameOfAttackedMonster = this.monsters.get(indexOfAttackingPlayer).name;
         String nameOfDefendingMonster = defendingPlayer.monsters.get(indexOfDefendingPlayer).getName();
+
+        this.monsters.get(indexOfAttackingPlayer).attack(defendingPlayer.monsters.get(indexOfDefendingPlayer));
         int healthOfDefendingMonster = defendingPlayer.monsters.get(indexOfDefendingPlayer).HEALTH;
+
         if (defendingPlayer.monsters.get(indexOfDefendingPlayer).HEALTH <= 0) {
             defendingPlayer.monsters.remove(defendingPlayer.monsters.get(indexOfDefendingPlayer));
             defendingPlayer.numberOfMonsters--;
         }
+        logOfEachRound(nameOfAttackedMonster, nameOfDefendingMonster, healthOfDefendingMonster, defendingPlayer);
+    }
+
+    private void logOfEachRound(String nameOfAttackedMonster, String nameOfDefendingMonster, int healthOfDefendingMonster, Player defendingPlayer) {
         if (healthOfDefendingMonster > 0) {
             System.out.println("\nThe " + nameOfAttackedMonster + " of " + this.name
-                    + " attacked the " + nameOfDefendingMonster + " of " +defendingPlayer.name+ " and the "+
+                    + " attacked the " + nameOfDefendingMonster + " of " + defendingPlayer.name + " and the " +
                     nameOfDefendingMonster + " has now " + healthOfDefendingMonster + " health");
         } else {
             System.out.println("\nThe " + nameOfAttackedMonster + " of " + this.name + " attacked the "

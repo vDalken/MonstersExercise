@@ -36,12 +36,12 @@ class GameManager {
     }
 
     private void attackingRounds(Player player1, Player player2) {
-        do {
+        while (!(player1.getMonsters().isEmpty() || player2.getMonsters().isEmpty())){
             player1.randomizedAttack(player2);
             if (player2.getMonsters().isEmpty()) break;
             player2.randomizedAttack(player1);
             if (player1.getMonsters().isEmpty()) break;
-        } while (!(player1.getMonsters().isEmpty() || player2.getMonsters().isEmpty()));
+        }
         showWinner(player1);
     }
 
