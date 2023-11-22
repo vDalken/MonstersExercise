@@ -4,13 +4,17 @@ class GameManager {
     private Player player2 = new Player("Player 2");
 
     public void startNewGame() {
-        System.out.println("\nThe number of monsters you pick has to be the same as your opponent.\n" +
-                "If both of you don't reach a consensus, both will get a default number of 5 monsters each\n");
+        printGameHeader();
         pickNumberOfMonsters(player1, player2);
         checkIfNumberOfMonstersIsEqual(player1, player2);
         initializePlayersMonsters(player1, player2);
         showArrayListOfMonstersOfPlayers(player1, player2);
         attackingRounds(player1, player2);
+    }
+
+    private void printGameHeader() {
+        System.out.println("\nThe number of monsters you pick has to be the same as your opponent.\n" +
+                "If both of you don't reach a consensus, both will get a default number of 5 monsters each\n");
     }
 
     private void pickNumberOfMonsters(Player player1, Player player2) {
@@ -36,7 +40,7 @@ class GameManager {
     }
 
     private void attackingRounds(Player player1, Player player2) {
-        while (!(player1.getMonsters().isEmpty() || player2.getMonsters().isEmpty())){
+        while (!(player1.getMonsters().isEmpty() || player2.getMonsters().isEmpty())) {
             player1.randomizedAttack(player2);
             if (player2.getMonsters().isEmpty()) break;
             player2.randomizedAttack(player1);
@@ -45,7 +49,7 @@ class GameManager {
         showWinner(player1);
     }
 
-    private void showWinner(Player player1){
+    private void showWinner(Player player1) {
         System.out.println(player1.getMonsters().isEmpty() ? "\nPlayer 1 won" : "\nPlayer 2 won");
     }
 }
