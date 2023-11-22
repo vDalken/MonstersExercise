@@ -1,7 +1,7 @@
 class GameManager {
     private final int DEFAULT_NUMBER_OF_MONSTERS = 5;
-    Player player1 = new Player("Player 1");
-    Player player2 = new Player("Player 2");
+    private Player player1 = new Player("Player 1");
+    private Player player2 = new Player("Player 2");
 
     public void startNewGame() {
         System.out.println("\nThe number of monsters you pick has to be the same as your opponent.\n" +
